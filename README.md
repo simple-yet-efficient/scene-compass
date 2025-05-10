@@ -14,7 +14,9 @@ Save important positions and GameObjects for quick navigation. Create bookmark g
 
 ## Installation
 
-### Option 1: Unity Package Manager (UPM) via Git URL
+### Option 1: Unity Assets Store from [here](https://assetstore.unity.com/packages/slug/319827).
+
+### Option 2: Unity Package Manager (UPM) via Git URL
 
 1. Open your Unity project
 2. Go to Window > Package Manager
@@ -23,7 +25,7 @@ Save important positions and GameObjects for quick navigation. Create bookmark g
 5. Enter `https://github.com/simple-yet-efficient/scene-compass.git`
 6. Click "Add"
 
-### Option 2: Download and Import
+### Option 3: Download and Import
 
 1. Download the latest release from the [Releases page](https://github.com/simple-yet-efficient/scene-compass/releases)
 2. Unzip the package
@@ -44,8 +46,8 @@ For detailed usage instructions, visit our [Wiki](https://github.com/simple-yet-
 ## Keyboard Shortcuts
 
 - `M` (hold): Activate measurement tool
-- `B`: Open bookmarks window
-- `Ctrl+Alt+Shift+B`: Add current view/selection as bookmark
+- `Alt+B`: Open bookmarks window
+- `Alt+Shift+B`: Add current view/selection as bookmark
 
 ## Our Other Assets
 
