@@ -2,7 +2,7 @@
 
 A lightweight Unity editor utility for measuring, bookmarking, and navigating your scenes efficiently.
 
-![Scene Compass Banner](images/banner.png)
+![Scene Compass Banner](https://github.com/simple-yet-efficient/scene-compass/blob/main/images/banner.png?raw=true)
 
 ## Features
 
