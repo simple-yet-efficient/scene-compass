@@ -1,0 +1,8 @@
+{
+  "name": "com.sye.scenecompass",
+  "references": [],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "autoReferenced": true
+} 

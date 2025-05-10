@@ -1,0 +1,24 @@
+{
+  "name": "com.sye.scenecompass",
+  "version": "1.0.0",
+  "displayName": "Scene Compass",
+  "description": "A lightweight Unity editor utility for measuring, bookmarking, and navigating your scenes efficiently.",
+  "unity": "2020.3",
+  "keywords": [
+    "editor",
+    "utility",
+    "navigation",
+    "bookmark",
+    "measure"
+  ],
+  "author": {
+    "name": "Simple Yet Efficient",
+    "email": "aqaddora96@gmail.com",
+    "url": "https://github.com/simple-yet-efficient"
+  },
+  "documentationUrl": "https://github.com/simple-yet-efficient/scene-compass/wiki",
+  "changelogUrl": "https://github.com/simple-yet-efficient/scene-compass/releases",
+  "licensesUrl": "https://github.com/simple-yet-efficient/scene-compass/blob/main/LICENSE",
+  "dependencies": {},
+  "samples": []
+}

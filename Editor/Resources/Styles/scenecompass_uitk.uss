@@ -1,0 +1,9 @@
+/* scenecompass_uitk.uss */
+.button {
+    --button-background-color: #00CFFF;
+    --button-text-color: #FFFFFF;
+}
+
+.label {
+    color: #FFFFFF;
+} 
