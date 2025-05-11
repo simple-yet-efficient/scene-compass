@@ -1,8 +1,10 @@
+![Scene Compass Banner](https://i.ibb.co/xSjWHTGk/banner.png)
 # Scene Compass
 
 A lightweight Unity editor utility for measuring, bookmarking, and navigating your scenes efficiently.
-
-![Scene Compass Banner](https://github.com/simple-yet-efficient/scene-compass/blob/main/images/banner.png?raw=true)
+<p align="center">
+   <img src="https://i.ibb.co/3mn09zVh/Blue-Futuristic-Appreciation-Certificate.png" alt="Scene Compass" width="700"/>
+</p>
 
 ## Features
 
