@@ -19,8 +19,8 @@ public class HelpWindow : EditorWindow
             window.minSize = new Vector2(600, 500);
             window.maxSize = new Vector2(800, 700);
             window.Show();
-        }
-        
+    }
+
         private void OnEnable()
         {
             // Load textures
@@ -29,7 +29,7 @@ public class HelpWindow : EditorWindow
             
             // Create dummy textures if actual textures are missing
             if (logoTexture == null)
-            {
+    {
                 logoTexture = CreateDummyTexture(120, 120, Color.white, "SC");
             }
             
@@ -283,7 +283,7 @@ public class HelpWindow : EditorWindow
                 Process.Start(url);
             }
             catch
-            {
+        {
                 // On some platforms Process.Start doesn't work for URLs
                 if (Application.platform == RuntimePlatform.WindowsEditor)
                 {

@@ -3,3 +3,7 @@
 wiki/
 wiki.meta
 images/*.meta
+Editor/Resources/BookmarkData
+Editor/Resources/BookmarkData/
+Editor/Resources/BookmarkData.meta
+.DS_Store

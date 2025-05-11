@@ -6,6 +6,7 @@ using System.IO;
 using UnityEditor.ShortcutManagement;
 using System.Linq;
 using System.Diagnostics; // Required for Process.Start
+using System.Collections; // Required for coroutines
 
 namespace SyE.SceneCompass.Editor
 {
@@ -55,6 +56,16 @@ public class BookmarkTool : EditorWindow
 
         // Store window instance for direct access
         public static BookmarkTool instance;
+
+        // For camera lerping
+        private bool isLerping = false;
+        private float lerpDuration = 0.4f; // Duration in seconds
+        private Vector3 startPivot;
+        private Quaternion startRotation;
+        private Vector3 targetPivot;
+        private Quaternion targetRotation;
+        private float lerpStartTime;
+        private SceneView lerpSceneView;
 
         // Register menu item for opening window
         [MenuItem("Window/Scene Compass/Open Bookmarks %b", false, 0)]
@@ -117,6 +128,9 @@ public class BookmarkTool : EditorWindow
             UnityEditor.SceneManagement.EditorSceneManager.sceneOpened += OnSceneOpened;
             UnityEditor.SceneManagement.EditorSceneManager.sceneClosed += OnSceneClosed;
             UnityEditor.SceneManagement.EditorSceneManager.sceneSaved += OnSceneSaved;
+
+            // Subscribe to EditorApplication.update for lerping
+            EditorApplication.update += OnEditorUpdate;
         }
 
         private void OnFocus()
@@ -142,6 +156,9 @@ public class BookmarkTool : EditorWindow
             UnityEditor.SceneManagement.EditorSceneManager.sceneOpened -= OnSceneOpened;
             UnityEditor.SceneManagement.EditorSceneManager.sceneClosed -= OnSceneClosed;
             UnityEditor.SceneManagement.EditorSceneManager.sceneSaved -= OnSceneSaved;
+
+            // Unsubscribe from EditorApplication.update
+            EditorApplication.update -= OnEditorUpdate;
         }
 
         private void OnSceneOpened(UnityEngine.SceneManagement.Scene scene, UnityEditor.SceneManagement.OpenSceneMode mode)
@@ -696,14 +713,12 @@ public class BookmarkTool : EditorWindow
 
             if (bookmark.type == BookmarkType.Camera)
             {
-                // Move the SceneView camera to the saved position and rotation
+                // Move the SceneView camera to the saved position and rotation with lerping
                 SceneView sceneView = SceneView.lastActiveSceneView;
                 if (sceneView != null)
                 {
-                    // Set only the pivot and rotation - this will update the camera transform correctly
-                    sceneView.pivot = bookmark.cameraPosition;
-                    sceneView.rotation = bookmark.cameraRotation;
-                    sceneView.Repaint();
+                    // Start camera lerping
+                    StartCameraLerp(sceneView, bookmark.cameraPosition, bookmark.cameraRotation);
                 }
             }
             else if (bookmark.type == BookmarkType.GameObject)
@@ -730,6 +745,57 @@ public class BookmarkTool : EditorWindow
                         EditorUtility.DisplayDialog("Bookmark Not Found", "The bookmarked GameObject could not be found in the scene.", "OK");
                     }
                 }
+            }
+        }
+
+        // Start the camera lerp process
+        private void StartCameraLerp(SceneView sceneView, Vector3 targetPosition, Quaternion targetRotation)
+        {
+            // If already lerping, just update the target
+            if (isLerping)
+            {
+                this.targetPivot = targetPosition;
+                this.targetRotation = targetRotation;
+                return;
+            }
+            
+            // Initialize lerp values
+            isLerping = true;
+            lerpSceneView = sceneView;
+            startPivot = sceneView.pivot;
+            startRotation = sceneView.rotation;
+            this.targetPivot = targetPosition;
+            this.targetRotation = targetRotation;
+            lerpStartTime = (float)EditorApplication.timeSinceStartup;
+            
+            // Force repaint during lerp
+            sceneView.Repaint();
+        }
+        
+        // EditorApplication.update callback for handling the lerp
+        private void OnEditorUpdate()
+        {
+            if (!isLerping || lerpSceneView == null)
+                return;
+                
+            float timeSinceStart = (float)EditorApplication.timeSinceStartup - lerpStartTime;
+            float t = Mathf.Clamp01(timeSinceStart / lerpDuration);
+            
+            // Use smoothstep for easing
+            t = t * t * (3f - 2f * t); // Smoothstep formula
+            
+            // Update camera position and rotation
+            lerpSceneView.pivot = Vector3.Lerp(startPivot, targetPivot, t);
+            lerpSceneView.rotation = Quaternion.Slerp(startRotation, targetRotation, t);
+            
+            // Force the scene view to update
+            lerpSceneView.Repaint();
+            
+            // Check if lerp is complete
+            if (t >= 1.0f)
+            {
+                isLerping = false;
+                lerpSceneView = null;
             }
         }
 

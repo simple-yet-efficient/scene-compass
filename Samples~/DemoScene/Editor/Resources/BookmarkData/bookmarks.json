@@ -1,0 +1,239 @@
+{
+    "bookmarks": [
+        {
+            "type": 0,
+            "name": "Measure Mode Tool",
+            "group": "Measure",
+            "iconPath": "",
+            "objectGlobalID": "",
+            "cameraPosition": {
+                "x": 1044.5848388671875,
+                "y": -103.49238586425781,
+                "z": 1225.2830810546875
+            },
+            "cameraRotation": {
+                "x": 0.12385737150907517,
+                "y": 0.09954577684402466,
+                "z": -0.012489644810557366,
+                "w": 0.987208902835846
+            },
+            "sceneGUID": "ae38ab0f71e484e3f99e3d0cb764e033"
+        },
+        {
+            "type": 0,
+            "name": "How it works",
+            "group": "Measure",
+            "iconPath": "",
+            "objectGlobalID": "",
+            "cameraPosition": {
+                "x": 986.9874267578125,
+                "y": -26.458797454833986,
+                "z": 758.6681518554688
+            },
+            "cameraRotation": {
+                "x": 0.26956695318222048,
+                "y": -0.04908942058682442,
+                "z": 0.013760344125330449,
+                "w": 0.9616222977638245
+            },
+            "sceneGUID": "ae38ab0f71e484e3f99e3d0cb764e033"
+        },
+        {
+            "type": 0,
+            "name": "Snap & Precision",
+            "group": "Measure",
+            "iconPath": "",
+            "objectGlobalID": "",
+            "cameraPosition": {
+                "x": 422.38043212890627,
+                "y": 6.0337934494018559,
+                "z": -185.7683563232422
+            },
+            "cameraRotation": {
+                "x": 0.07152236998081207,
+                "y": 0.24285763502120973,
+                "z": -0.017958642914891244,
+                "w": 0.9672471880912781
+            },
+            "sceneGUID": "ae38ab0f71e484e3f99e3d0cb764e033"
+        },
+        {
+            "type": 0,
+            "name": "Path Mode",
+            "group": "Measure",
+            "iconPath": "",
+            "objectGlobalID": "",
+            "cameraPosition": {
+                "x": 240.02578735351563,
+                "y": 55.64162826538086,
+                "z": -345.3672790527344
+            },
+            "cameraRotation": {
+                "x": 0.18959827721118928,
+                "y": 0.02355797030031681,
+                "z": -0.004550537094473839,
+                "w": 0.9815605282783508
+            },
+            "sceneGUID": "ae38ab0f71e484e3f99e3d0cb764e033"
+        },
+        {
+            "type": 0,
+            "name": "Clear",
+            "group": "Measure",
+            "iconPath": "",
+            "objectGlobalID": "",
+            "cameraPosition": {
+                "x": -115.62019348144531,
+                "y": 136.9413299560547,
+                "z": -463.6251525878906
+            },
+            "cameraRotation": {
+                "x": 0.17744502425193788,
+                "y": 0.2819388508796692,
+                "z": -0.053144633769989017,
+                "w": 0.9413719177246094
+            },
+            "sceneGUID": "ae38ab0f71e484e3f99e3d0cb764e033"
+        },
+        {
+            "type": 0,
+            "name": "More Assets",
+            "group": "Measure",
+            "iconPath": "",
+            "objectGlobalID": "",
+            "cameraPosition": {
+                "x": -270.5357360839844,
+                "y": 190.01719665527345,
+                "z": -760.5616455078125
+            },
+            "cameraRotation": {
+                "x": 0.26992788910865786,
+                "y": 0.42498379945755007,
+                "z": -0.1344052255153656,
+                "w": 0.853488028049469
+            },
+            "sceneGUID": "ae38ab0f71e484e3f99e3d0cb764e033"
+        },
+        {
+            "type": 0,
+            "name": "Bookmark Demo",
+            "group": "Bookmarks",
+            "iconPath": "",
+            "objectGlobalID": "",
+            "cameraPosition": {
+                "x": 1050.0252685546875,
+                "y": -99.64546966552735,
+                "z": 1239.6646728515625
+            },
+            "cameraRotation": {
+                "x": 0.254077672958374,
+                "y": 0.09988278150558472,
+                "z": -0.026388956233859063,
+                "w": 0.961640477180481
+            },
+            "sceneGUID": "392449235bb4c48e78a90d4579d9dfbb"
+        },
+        {
+            "type": 0,
+            "name": "Game Object",
+            "group": "Bookmarks",
+            "iconPath": "",
+            "objectGlobalID": "",
+            "cameraPosition": {
+                "x": 416.5341491699219,
+                "y": 10.177713394165039,
+                "z": -187.24203491210938
+            },
+            "cameraRotation": {
+                "x": 0.14809195697307588,
+                "y": 0.20025403797626496,
+                "z": -0.030634870752692224,
+                "w": 0.9680031538009644
+            },
+            "sceneGUID": "392449235bb4c48e78a90d4579d9dfbb"
+        },
+        {
+            "type": 0,
+            "name": "Camera View",
+            "group": "Bookmarks",
+            "iconPath": "",
+            "objectGlobalID": "",
+            "cameraPosition": {
+                "x": 963.7910766601563,
+                "y": -26.974565505981447,
+                "z": 763.0791015625
+            },
+            "cameraRotation": {
+                "x": 0.14322423934936524,
+                "y": 0.21634458005428315,
+                "z": -0.0321008674800396,
+                "w": 0.9652208685874939
+            },
+            "sceneGUID": "392449235bb4c48e78a90d4579d9dfbb"
+        },
+        {
+            "type": 0,
+            "name": "Groups & Search",
+            "group": "Bookmarks",
+            "iconPath": "",
+            "objectGlobalID": "",
+            "cameraPosition": {
+                "x": 242.30410766601563,
+                "y": 64.82337951660156,
+                "z": -312.7169494628906
+            },
+            "cameraRotation": {
+                "x": 0.17329636216163636,
+                "y": -0.038403384387493137,
+                "z": 0.00676413020119071,
+                "w": 0.9840973019599915
+            },
+            "sceneGUID": "392449235bb4c48e78a90d4579d9dfbb"
+        },
+        {
+            "type": 0,
+            "name": "Cross Scene",
+            "group": "Bookmarks",
+            "iconPath": "",
+            "objectGlobalID": "",
+            "cameraPosition": {
+                "x": -93.53121948242188,
+                "y": 118.1339340209961,
+                "z": -450.9659118652344
+            },
+            "cameraRotation": {
+                "x": 0.152377188205719,
+                "y": -0.06518267095088959,
+                "z": 0.010073615238070488,
+                "w": 0.9861181974411011
+            },
+            "sceneGUID": "392449235bb4c48e78a90d4579d9dfbb"
+        },
+        {
+            "type": 0,
+            "name": "More Assets",
+            "group": "Bookmarks",
+            "iconPath": "",
+            "objectGlobalID": "",
+            "cameraPosition": {
+                "x": -287.3161315917969,
+                "y": 206.6478729248047,
+                "z": -753.1696166992188
+            },
+            "cameraRotation": {
+                "x": 0.14014603197574616,
+                "y": 0.3482978045940399,
+                "z": -0.0527491420507431,
+                "w": 0.9253446459770203
+            },
+            "sceneGUID": "392449235bb4c48e78a90d4579d9dfbb"
+        }
+    ],
+    "lastUsedGroup": "Measure",
+    "groupExpansionStates": [
+        {
+            "groupName": "Default",
+            "isExpanded": false
+        }
+    ]
+}
