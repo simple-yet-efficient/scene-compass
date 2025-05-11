@@ -25,11 +25,26 @@ namespace SyE.SceneCompass.Editor
         // Called every editor update - use this to consistently check key state
         private static void OnEditorUpdate()
         {
-            // Check if keys are pressed/held using Unity's Input system
+            // Use Input.GetKey for reliable key detection
             bool wasMKeyDown = isMKeyDown;
-            isMKeyDown = Event.current != null && Event.current.type != EventType.KeyUp && 
-                        (Event.current.keyCode == KeyCode.M || Input.GetKey(KeyCode.M));
-            
+            // Get current event
+            Event e = Event.current;
+
+            // Update key state based on events
+            if (e != null)
+            {
+                if (e.type == EventType.KeyDown && e.keyCode == KeyCode.M)
+                {
+                    isMKeyDown = true;
+                    e.Use();
+                }
+                else if (e.type == EventType.KeyUp && e.keyCode == KeyCode.M)
+                {
+                    isMKeyDown = false;
+                    e.Use();
+                }
+            }
+
             // Force SceneView repaint when M key state changes
             if (wasMKeyDown != isMKeyDown)
             {
@@ -39,57 +54,62 @@ namespace SyE.SceneCompass.Editor
                 }
             }
         }
-        
+
         private static void OnSceneGUI(SceneView sceneView)
         {
             // Get current event
             Event e = Event.current;
-            
-            // Continually check if M is down to handle varying event orders
-            bool currentKeyDown = Event.current.keyCode == KeyCode.M || Input.GetKey(KeyCode.M);
-            isMKeyDown = isMKeyDown || currentKeyDown;
-            
+
+            // Update key state based on events
+            if (e != null)
+            {
+                if (e.type == EventType.KeyDown && e.keyCode == KeyCode.M)
+                {
+                    isMKeyDown = true;
+                    e.Use();
+                }
+                else if (e.type == EventType.KeyUp && e.keyCode == KeyCode.M)
+                {
+                    isMKeyDown = false;
+                    e.Use();
+                }
+            }
+
+            // Always draw tooltip if M is held
+            if (isMKeyDown)
+            {
+                DrawTooltipIfNeeded();
+            }
+
             // If M key isn't down and we don't have points, exit early
             if (!isMKeyDown && points.Count == 0)
+            {
                 return;
-            
+            }
+
+            // Check for Control/Command key
+            bool isSnapKeyDown = Event.current.control || Event.current.command;
+
             // Handle key states
             switch (e.type)
             {
-                case EventType.KeyDown:
-                    if (e.keyCode == KeyCode.M)
-                    {
-                        isMKeyDown = true;
-                        e.Use(); // Use the event to prevent default behavior
-                        sceneView.Repaint();
-                    }
-                    break;
-                    
-                case EventType.KeyUp:
-                    if (e.keyCode == KeyCode.M)
-                    {
-                        isMKeyDown = false;
-                        sceneView.Repaint();
-                    }
-                    break;
-                    
                 case EventType.MouseDown:
-                    // Only handle mouse clicks when M is down or we have existing points
-                    if (isMKeyDown || points.Count > 0)
+                    // Only handle mouse clicks when M is down
+                    if (isMKeyDown)
                     {
                         if (e.button == 0) // Left click
                         {
                             // Get point in world space
-                            Vector3 point = GetMouseWorldPosition(e.mousePosition, e.control);
-                            
+                            Vector3 point = GetMouseWorldPosition(e.mousePosition, isSnapKeyDown);
+
                             // Add new point to the path
                             points.Add(point);
-                            
+
                             // Update total distance if we have more than one point
                             if (points.Count > 1)
                             {
                                 totalDistance += Vector3.Distance(
-                                    points[points.Count - 2], 
+                                    points[points.Count - 2],
                                     points[points.Count - 1]
                                 );
                             }
@@ -97,7 +117,7 @@ namespace SyE.SceneCompass.Editor
                             {
                                 totalDistance = 0f;
                             }
-                            
+
                             e.Use(); // Use the event to prevent default Unity behavior
                         }
                         else if (e.button == 1 && isMKeyDown) // Right click with M key held - clear measurements
@@ -106,18 +126,18 @@ namespace SyE.SceneCompass.Editor
                             totalDistance = 0f;
                             e.Use();
                         }
-                        
+
                         sceneView.Repaint();
                     }
                     break;
-                    
+
                 case EventType.Layout:
                 case EventType.Repaint:
                     // Draw measurement visualizations
                     DrawMeasurements(sceneView, e);
                     break;
             }
-            
+
             // Keep the toolbar and editor active during measuring
             if (isMKeyDown)
             {
@@ -125,10 +145,20 @@ namespace SyE.SceneCompass.Editor
             }
         }
         
+        private static void DrawTooltipIfNeeded()
+        {
+            Handles.BeginGUI();
+            GUI.Label(new Rect(10, 10, 400, 20), "\uD83D\uDCCF Measure Tool: Click to place point, Right-click to clear", EditorStyles.boldLabel);
+            GUI.Label(new Rect(10, 30, 300, 20), "Hold Ctrl to snap", EditorStyles.miniLabel);
+            Handles.EndGUI();
+        }
+
         private static void DrawMeasurements(SceneView sceneView, Event e)
         {
             if (points.Count == 0)
+            {
                 return;
+            }
                 
             // Set color for measurement elements
             Handles.color = SceneCompassColors.Primary;
@@ -145,7 +175,7 @@ namespace SyE.SceneCompass.Editor
                 for (int i = 0; i < points.Count - 1; i++)
                 {
                     Handles.DrawAAPolyLine(6, points[i], points[i + 1]);
-                    
+
                     // Display segment distance
                     Vector3 delta = points[i + 1] - points[i];
                     string segmentLabel = $"Segment: {delta.magnitude:F2}";
@@ -183,7 +213,9 @@ namespace SyE.SceneCompass.Editor
             // Draw temporary line from last point to mouse position while key is held
             if (isMKeyDown && points.Count > 0)
             {
-                Vector3 mousePos = GetMouseWorldPosition(e.mousePosition, e.control);
+                // Check for Control/Command key
+                bool isSnapKeyDown = Event.current.control || Event.current.command;
+                Vector3 mousePos = GetMouseWorldPosition(e.mousePosition, isSnapKeyDown);
                 Handles.color = new Color(SceneCompassColors.Primary.r, 
                                           SceneCompassColors.Primary.g, 
                                           SceneCompassColors.Primary.b, 0.5f);
@@ -199,15 +231,6 @@ namespace SyE.SceneCompass.Editor
                 };
                 Handles.Label((points[points.Count - 1] + mousePos) / 2, nextLabel, nextStyle);
             }
-            
-            // Display tool instructions when active
-            if (isMKeyDown)
-            {
-                Handles.BeginGUI();
-                GUI.Label(new Rect(10, 10, 400, 20), "📏 Measure Tool: Click to place point, Right-click to clear", EditorStyles.boldLabel);
-                GUI.Label(new Rect(10, 30, 300, 20), "Hold Ctrl to snap", EditorStyles.miniLabel);
-                Handles.EndGUI();
-            }
         }
 
         private static Vector3 GetMouseWorldPosition(Vector2 mousePosition, bool snap)
@@ -217,12 +240,14 @@ namespace SyE.SceneCompass.Editor
             {
                 if (snap)
                 {
-                    return hit.collider.bounds.center;
+                    // Snap to the nearest grid point
+                    Vector3 snappedPoint = hit.point;
+                    snappedPoint.x = Mathf.Round(snappedPoint.x);
+                    snappedPoint.y = Mathf.Round(snappedPoint.y);
+                    snappedPoint.z = Mathf.Round(snappedPoint.z);
+                    return snappedPoint;
                 }
-                else
-                {
-                    return hit.point;
-                }
+                return hit.point;
             }
             else
             {

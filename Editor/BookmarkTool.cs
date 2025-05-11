@@ -628,8 +628,9 @@ public class BookmarkTool : EditorWindow
                 SceneView sceneView = SceneView.lastActiveSceneView;
                 if (sceneView != null)
                 {
-                    entry.cameraPosition = sceneView.camera.transform.position;
-                    entry.cameraRotation = sceneView.camera.transform.rotation;
+                    // Store the pivot and rotation from SceneView which determines the camera's view
+                    entry.cameraPosition = sceneView.pivot;
+                    entry.cameraRotation = sceneView.rotation;
                 }
             }
 
@@ -699,11 +700,9 @@ public class BookmarkTool : EditorWindow
                 SceneView sceneView = SceneView.lastActiveSceneView;
                 if (sceneView != null)
                 {
-                    // Set both position and rotation
+                    // Set only the pivot and rotation - this will update the camera transform correctly
                     sceneView.pivot = bookmark.cameraPosition;
                     sceneView.rotation = bookmark.cameraRotation;
-                    sceneView.camera.transform.position = bookmark.cameraPosition;
-                    sceneView.camera.transform.rotation = bookmark.cameraRotation;
                     sceneView.Repaint();
                 }
             }
@@ -876,7 +875,7 @@ public class BookmarkTool : EditorWindow
                 {
                     UnityEngine.Debug.LogError($"Failed to load bookmarks from {dataPath}: {e.Message}");
                 }
-            }
+        }
     }
 
     private void SaveBookmarks()
