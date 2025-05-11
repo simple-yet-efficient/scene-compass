@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Bookmark System
   - Smooth camera lerping when navigating to a camera view bookmark
+  - Automatic sample bookmarks import when samples are imported
 
 ### Fixed
 - Measure Tool

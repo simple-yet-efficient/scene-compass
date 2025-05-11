@@ -22,9 +22,9 @@
   "dependencies": {},
   "samples": [
     {
-      "displayName": "Demo Scene",
-      "description": "A complete demo scene showing how to use Scene Compass",
-      "path": "Samples~/DemoScene/Scenes/BookmarkDemo.unity"
+      "displayName": "Demo",
+      "description": "A complete demo showing how to use Scene Compass",
+      "path": "Samples~/Demo"
     }
   ],
   "type": "library"
